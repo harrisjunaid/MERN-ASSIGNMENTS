@@ -7,6 +7,7 @@ const Board = () => {
 
   // Part 1 step 1 code goes here
   // Use conditional logic to set a variable to either 'Player O' or  'Player X'
+  let playerTurn = `Next Player: Player ${player==1?"X":"O"}`
 
   console.log(`We hav a winner ${status}`);
 
@@ -42,6 +43,7 @@ const Board = () => {
           Part 1 step 2 code goes here 
           Display the player's turn <h1>
         */}
+        <h1 id="turn">{playerTurn}</h1>
         <h1>{status}</h1>
       </div>
     </div>
@@ -57,13 +59,23 @@ const Square = ({ takeTurn, id }) => {
   const [filled, setFilled] = React.useState(false);
   const [tik, setTik] = React.useState(2);
 
+  // function classUpdate(player) {
+  //   if (player == 1) return "red";
+  //   else if (player == 0) return "white";
+  //   else null;
+  // }
+  // let player = null;
   return (
-    <button
+    <button 
       // Part 2: update the return statement below to add css classes
-      onClick={() => {
-        setTik(takeTurn(id));
+      onClick={(e) => {
+        console.log(e);
+        let player = takeTurn(id);
+        console.log(player);        
+        e.target.className = Number(player)==1?"red":"white"; 
+        setTik(player);
         setFilled(true);
-        console.log(`Square: ${id} filled by player : ${tik}`);
+        console.log(`Square: ${id} filled by player : ${player}`);
       }}
     >
       <h1>{mark[tik]}</h1>
